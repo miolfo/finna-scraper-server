@@ -18,7 +18,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', getAvailability);
+router.get('/api/availability', getAvailability);
 
 const httpServer = http.createServer(router);
 const port: any = process.env.PORT ?? 8080;
