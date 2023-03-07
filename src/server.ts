@@ -1,6 +1,6 @@
 import http from 'http';
 import express, { Express } from 'express';
-import routes from "./routes";
+import {getAvailability} from "./controllers/ScraperController";
 
 const router: Express = express();
 
@@ -18,8 +18,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use('/', routes);
-
+router.get('/', getAvailability);
 
 const httpServer = http.createServer(router);
 const port: any = process.env.PORT ?? 8080;

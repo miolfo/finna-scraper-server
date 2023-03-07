@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import {Builder, By} from "selenium-webdriver";
 import firefox from "selenium-webdriver/firefox"
-export const getData = async (req: Request, res: Response, next: NextFunction) => {
+export const getAvailability = async (req: Request, res: Response, next: NextFunction) => {
 
     let driver = await new Builder()
         .forBrowser("firefox")
@@ -14,7 +14,6 @@ export const getData = async (req: Request, res: Response, next: NextFunction) =
     try {
         await driver.get('https://www.finna.fi/Record/helmet.2527262');
         let test = await driver.findElement(By.className('record-title visible-xs'));
-        console.log(test)
         text = await test.getText()
     } finally {
         await driver.quit();
