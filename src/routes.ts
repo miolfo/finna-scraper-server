@@ -3,5 +3,5 @@ import {getData} from "./controllers/scrapercontroller";
 
 const router = express.Router();
 
-router.get('/posts', getData);
+router.get('/data', getData);
 export default router
