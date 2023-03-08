@@ -8,3 +8,9 @@ export const getAvailability = async (req: Request, res: Response, next: NextFun
         statuses: text
     });
 };
+
+export const ping = async (req: Request, res: Response, next: NextFunction) => {
+    return res.status(200).json({
+        message: "pong"
+    });
+}
