@@ -3,6 +3,7 @@ import {checkAvailability} from "../scraper/Scraper";
 export const getAvailability = async (req: Request, res: Response, next: NextFunction) => {
 
     const url = `https://www.finna.fi/Record/${req.query.id}`
+    console.log(`Checking availability from url ${url}`)
     let text = await checkAvailability(url)
     return res.status(200).json({
         statuses: text
