@@ -28,7 +28,7 @@ export const checkAvailability = async (finnaUrl: string): Promise<Status[]> => 
     await driver.get(finnaUrl);
     //Wait until holdings- info is loaded
     await driver.wait(until.elementLocated(By.className('holdings-title')),10000);
-    let allHoldings = await driver.wait(until.elementsLocated(By.xpath('//div[contains(@class, \'holdings-details\')]/span')), 10000);
+    const allHoldings = await driver.findElements(By.xpath('//div[contains(@class, \'holdings-details\')]/span'))
     for (const element of allHoldings) {
         const value = await element.getText();
         statuses.push(parseStatus(value));
@@ -39,12 +39,15 @@ export const checkAvailability = async (finnaUrl: string): Promise<Status[]> => 
 let driver: WebDriver | undefined = undefined
 const getDriver = async (): Promise<WebDriver> => {
     if (!driver) {
+        const opts = new firefox.Options()
+        opts.addArguments('-headless')
+        opts.windowSize({
+            width: 640,
+            height: 480
+        })
         driver = await new Builder()
             .forBrowser("firefox")
-            .setFirefoxOptions(new firefox.Options().headless().windowSize({
-                width: 640,
-                height: 480
-            }))
+            .setFirefoxOptions(opts)
             .build();
     }
     return driver
