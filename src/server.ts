@@ -1,6 +1,7 @@
 import http from 'http';
 import express, { Express } from 'express';
 import {getAvailability, ping} from "./controllers/ScraperController";
+import {getDriver} from "./scraper/Scraper";
 
 const router: Express = express();
 
@@ -24,3 +25,5 @@ router.get('/api/ping', ping);
 const httpServer = http.createServer(router);
 const port: any = process.env.PORT ?? 8080;
 httpServer.listen(port, () => console.log(`The server is running on port ${port}`));
+
+getDriver()

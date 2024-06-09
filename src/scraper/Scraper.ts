@@ -37,8 +37,9 @@ export const checkAvailability = async (finnaUrl: string): Promise<Status[]> => 
 }
 
 let driver: WebDriver | undefined = undefined
-const getDriver = async (): Promise<WebDriver> => {
+export const getDriver = async (): Promise<WebDriver> => {
     if (!driver) {
+        console.log("Starting selenium webdriver")
         const opts = new firefox.Options()
         opts.addArguments('-headless')
         opts.windowSize({
